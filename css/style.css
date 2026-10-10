@@ -40,7 +40,7 @@ p { margin: 0 0 1em; }
 .brand img { width: auto; height: 52px; }
 .brand-text { font-weight: 700; font-size: 1.35rem; line-height: 1; color: var(--brown); }
 .brand-text small { display: block; font: 600 .68rem/1.6 var(--sans); letter-spacing: .28em; color: var(--muted); margin-top: 4px; }
-.site-nav { flex: 1; padding-inline-start: 30px; border-inline-start: 1px solid var(--line); }
+.site-nav { flex: 1; }
 .site-nav ul { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
 .site-nav > ul > li:last-child { margin-inline-start: auto; }
 .site-nav a { display: block; padding: 8px 14px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 1.05rem; color: var(--text); transition: background .2s, color .2s; }
@@ -542,4 +542,14 @@ main > .section-alt + .cta-section { padding-top: 100px; }
 }
 @media (max-width: 900px) {
   .sub-desc, .site-nav .sub .sub-all { display: none; }
+}
+
+/* ---------- extra buttons ---------- */
+.btn-sm { padding: 12px 22px; font-size: 1rem; }
+.focus-body .btn { margin-top: 4px; }
+.page-actions { justify-content: center; margin-top: 28px; }
+.clients .section-more { margin-top: 34px; }
+.legal-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
+@media (max-width: 640px) {
+  .legal-actions .btn, .page-actions .btn { width: 100%; }
 }

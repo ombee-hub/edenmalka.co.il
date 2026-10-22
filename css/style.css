@@ -187,7 +187,6 @@ p { margin: 0 0 1em; }
 .wa-float { position: fixed; bottom: 22px; right: 22px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .45); transition: transform .2s; }
 .wa-float:hover { transform: scale(1.08); }
 .wa-float svg { width: 30px; height: 30px; fill: currentColor; }
-.a11y-right .wa-float { right: auto; left: 22px; }
 body.has-cookie-banner .wa-float { bottom: 120px; }
 
 /* ---------- lightbox ---------- */
@@ -552,4 +551,23 @@ main > .section-alt + .cta-section { padding-top: 100px; }
 .legal-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
 @media (max-width: 640px) {
   .legal-actions .btn, .page-actions .btn { width: 100%; }
+}
+
+/* ---------- design credit ---------- */
+.ombee-credit { display: inline-flex; align-items: center; gap: 8px; color: #b9a892; }
+.ombee-credit { gap: 12px; font-weight: 600; }
+.ombee-credit img { width: auto; height: 32px; filter: brightness(0) invert(1); opacity: .9; transition: opacity .2s, transform .2s; }
+.ombee-credit:hover img { opacity: 1; transform: translateY(-1px); }
+@media (max-width: 640px) {
+  .footer-bottom-inner { flex-direction: column; gap: 14px; }
+}
+
+/* ---------- mid-size screens: keep the desktop menu on one line ---------- */
+.site-nav a { white-space: nowrap; }
+@media (min-width: 901px) and (max-width: 1180px) {
+  .header-inner { gap: 18px; }
+  .brand-text { font-size: 1.2rem; }
+  .site-nav > ul { gap: 0; }
+  .site-nav a { padding: 8px 9px; font-size: 1rem; }
+  .site-nav a.cta { padding: 12px 18px; font-size: 1.02rem; min-height: 48px; }
 }

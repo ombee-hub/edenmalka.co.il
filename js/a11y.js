@@ -5,19 +5,17 @@
   var he = root.lang === 'he';
 
   var T = he ? {
-    open: 'פתיחת תפריט נגישות', title: 'תפריט נגישות', close: 'סגירה', big: 'יישומון גדול',
+    open: 'פתיחת תפריט נגישות', title: 'תפריט נגישות', close: 'סגירה',
     contrast: 'ניגודיות +', links: 'הדגשת קישורים', text: 'טקסט גדול', spacing: 'ריווח טקסט',
     pause: 'ביטול הנפשות', noimg: 'הסתרת תמונות', dyslexia: 'תמיכה בדיסלקציה', cursor: 'סמן גדול',
     tips: 'תיאורים', lh: 'גובה שורה', align: 'יישור טקסט', sat: 'רוויה',
-    reset: 'איפוס כל הגדרות הנגישות', move: 'העברת היישומון לצד השני', hide: 'הסתרת היישומון',
-    statement: 'הצהרת נגישות'
+    reset: 'איפוס כל הגדרות הנגישות', statement: 'הצהרת נגישות', privacy: 'מדיניות פרטיות'
   } : {
-    open: 'Open accessibility menu', title: 'Accessibility', close: 'Close', big: 'Large widget',
+    open: 'Open accessibility menu', title: 'Accessibility', close: 'Close',
     contrast: 'Contrast +', links: 'Highlight links', text: 'Bigger text', spacing: 'Text spacing',
     pause: 'Pause animations', noimg: 'Hide images', dyslexia: 'Dyslexia friendly', cursor: 'Big cursor',
     tips: 'Tooltips', lh: 'Line height', align: 'Text align', sat: 'Saturation',
-    reset: 'Reset all accessibility settings', move: 'Move widget to other side', hide: 'Hide widget',
-    statement: 'Accessibility statement'
+    reset: 'Reset all accessibility settings', statement: 'Accessibility statement', privacy: 'Privacy policy'
   };
 
   var ICONS = {
@@ -51,8 +49,6 @@
       if (max === 1) root.classList.toggle(CLASS[k], v > 0);
       else for (var i = 1; i <= max; i++) root.classList.toggle(CLASS[k] + i, v === i);
     });
-    root.classList.toggle('a11y-right', !!state.right);
-    root.classList.toggle('a11y-big', !!state.big);
   }
   apply(); // as early as possible, before the widget is built
 
@@ -81,23 +77,20 @@
     panel.innerHTML =
       '<div class="a11y-head"><h2>' + T.title + '</h2><button class="a11y-x" aria-label="' + T.close + '">' + svg('<path d="M6 6l12 12M18 6L6 18"/>') + '</button></div>' +
       '<div class="a11y-body">' +
-        '<div class="a11y-big-row"><span id="a11y-big-label">' + T.big + '</span><button class="a11y-switch" role="switch" aria-labelledby="a11y-big-label" aria-checked="false"></button></div>' +
         '<div class="a11y-grid">' + tiles + '</div>' +
         '<button class="a11y-reset">' + svg('<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>') + T.reset + '</button>' +
       '</div>' +
-      '<div class="a11y-foot"><button class="a11y-move">' + T.move + '</button><button class="a11y-hide">' + T.hide + '</button><a href="accessibility.html">' + T.statement + '</a></div>';
+      '<div class="a11y-foot"><a class="a11y-link" href="accessibility.html">' + T.statement + '</a><a class="a11y-link" href="privacy.html">' + T.privacy + '</a></div>';
 
     document.body.appendChild(launch);
     document.body.appendChild(panel);
 
-    var bigSwitch = panel.querySelector('.a11y-switch');
     function sync() {
       panel.querySelectorAll('.a11y-tile').forEach(function (b) {
         var k = b.dataset.tool, v = state[k] || 0;
         b.setAttribute('aria-pressed', v > 0 ? 'true' : 'false');
         b.querySelectorAll('.a11y-dots i').forEach(function (d, i) { d.classList.toggle('on', i < v); });
       });
-      bigSwitch.setAttribute('aria-checked', state.big ? 'true' : 'false');
     }
     sync();
 
@@ -120,15 +113,8 @@
       state[k] = ((state[k] || 0) + 1) % (max + 1);
       save(); apply(); sync();
     });
-    bigSwitch.addEventListener('click', function () { state.big = !state.big; save(); apply(); sync(); });
     panel.querySelector('.a11y-reset').addEventListener('click', function () {
-      var keep = { right: state.right };
-      state = keep; save(); apply(); sync();
-    });
-    panel.querySelector('.a11y-move').addEventListener('click', function () { state.right = !state.right; save(); apply(); });
-    panel.querySelector('.a11y-hide').addEventListener('click', function () {
-      setOpen(false);
-      root.classList.add('a11y-hidden'); // hidden until the next page load
+      state = {}; save(); apply(); sync();
     });
 
     // "Tooltips": show the alt text / label of images and links on hover and keyboard focus

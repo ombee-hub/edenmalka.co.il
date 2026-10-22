@@ -10,11 +10,10 @@
     box.setAttribute('aria-label', 'הודעת עוגיות');
     box.innerHTML =
       '<h2>האתר משתמש בעוגיות</h2>' +
-      '<p>אנו משתמשים באחסון דפדפן חיוני ובשירותי צד שלישי (Google Fonts) כדי שהאתר יעבוד כראוי. ' +
-      'לפרטים נוספים: <a href="privacy.html">מדיניות פרטיות</a>.</p>' +
+      '<p>אתר זה משתמש בעוגיות (Cookies) כדי לשפר את חוויית הגלישה שלך. לפרטים נוספים ניתן לעיין ב<a href="privacy.html">מדיניות הפרטיות</a>.</p>' +
       '<div class="cookie-actions">' +
         '<button class="cookie-accept">מאשר/ת</button>' +
-        '<button class="cookie-decline">חיוניות בלבד</button>' +
+        '<button class="cookie-decline">ביטול</button>' +
       '</div>';
     document.body.appendChild(box);
     document.body.classList.add('has-cookie-banner');

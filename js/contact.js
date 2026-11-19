@@ -71,7 +71,7 @@
     e.preventDefault();
     if (!validate()) return;
     var url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message());
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('a11y-pause');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('a11y-stopAnim');
     // Open the tab right away (inside the click) so popup blockers allow it, then let the plane fly
     window.open(url, '_blank', 'noopener');
     if (reduce) { done(); return; }

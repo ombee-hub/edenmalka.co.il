@@ -181,13 +181,15 @@ p { margin: 0 0 1em; }
 .footer-bottom { border-top: 1px solid rgba(217, 203, 184, .15); }
 .footer-bottom-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding: 20px 0; font-size: .9rem; color: #b9a892; }
 .footer-bottom .copy { margin: 0; }
-.legal-links { display: flex; gap: 20px; }
+.legal-links { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+.legal-links li + li { margin-inline-start: 16px; padding-inline-start: 16px; border-inline-start: 1px solid rgba(217, 203, 184, .4); }
+.legal-links a { color: #d9cbb8; }
+.legal-links a:hover { color: var(--accent-soft); }
 
 /* ---------- floating whatsapp ---------- */
 .wa-float { position: fixed; bottom: 22px; right: 22px; z-index: 90; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .45); transition: transform .2s; }
 .wa-float:hover { transform: scale(1.08); }
 .wa-float svg { width: 30px; height: 30px; fill: currentColor; }
-body.has-cookie-banner .wa-float { bottom: 120px; }
 
 /* ---------- lightbox ---------- */
 .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(28, 20, 14, .94); display: grid; place-items: center; padding: 40px 80px; }
@@ -570,4 +572,38 @@ main > .section-alt + .cta-section { padding-top: 100px; }
   .site-nav > ul { gap: 0; }
   .site-nav a { padding: 8px 9px; font-size: 1rem; }
   .site-nav a.cta { padding: 12px 18px; font-size: 1.02rem; min-height: 48px; }
+}
+
+/* ---------- cookie banner (OMBee, full width; home page only) ---------- */
+.cookie-banner {
+  position: fixed; z-index: 90; left: 0; right: 0; bottom: 0;
+  background: var(--text); color: #fff; border-top: 3px solid var(--accent-soft);
+  box-shadow: 0 -18px 40px -20px rgba(28, 20, 14, .55);
+  transform: translateY(100%); opacity: 0; transition: transform .4s cubic-bezier(.2, .7, .2, 1), opacity .4s;
+}
+.cookie-banner.show { transform: none; opacity: 1; }
+.cookie-inner { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 18px 0; }
+.cookie-ico { width: 38px; height: 38px; flex: none; fill: none; stroke: var(--accent-soft); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.cookie-ico circle { fill: var(--accent-soft); stroke: none; }
+.cookie-banner p { flex: 0 1 auto; margin: 0; font-size: 1rem; line-height: 1.6; color: #f3e9da; }
+.cookie-banner p a { color: var(--accent-soft); font-weight: 700; text-underline-offset: 3px; }
+.cookie-actions { display: flex; gap: 10px; flex: none; }
+.cookie-actions .btn { min-height: 46px; padding: 0 26px; font-size: .95rem; min-width: 116px; }
+.cookie-banner .btn-primary { background: var(--accent-soft); border-color: var(--accent-soft); color: #173f3d; box-shadow: none; }
+.cookie-banner .btn-primary:hover { background: #7fd9d5; border-color: #7fd9d5; }
+.cookie-banner .btn-ghost { border-color: rgba(255, 255, 255, .45); color: #fff; }
+.cookie-banner .btn-ghost:hover { background: #fff; color: var(--brown); border-color: #fff; box-shadow: none; }
+/* while the banner shows: the accessibility button (left) and WhatsApp (right) sit on it, centred to its height */
+body.has-cookie-banner .wa-float { z-index: 95; bottom: calc((var(--cookie-h, 80px) - 58px) / 2) !important; }
+body.has-cookie-banner .ombee-a11y-btn { bottom: calc((var(--cookie-h, 80px) - 46px) / 2) !important; box-shadow: 0 0 0 3px var(--accent-soft), 0 6px 18px rgba(0, 0, 0, .3); }
+html.a11y-contrast .cookie-banner { background: #000; border-top-color: #ffeb3b; }
+@media (max-width: 640px) {
+  .cookie-inner { flex-wrap: wrap; gap: 12px 14px; padding: 16px 0 calc(16px + env(safe-area-inset-bottom)); }
+  .cookie-ico { width: 30px; height: 30px; }
+  .cookie-banner p { flex: 1 1 calc(100% - 46px); font-size: .95rem; }
+  .cookie-actions { width: 100%; }
+  .cookie-actions .btn { flex: 1; }
+  /* the banner wraps taller on phones: lift both floating buttons above it */
+  body.has-cookie-banner .wa-float { bottom: calc(var(--cookie-h, 0px) + 16px) !important; }
+  body.has-cookie-banner .ombee-a11y-btn { bottom: calc(var(--cookie-h, 0px) + 16px) !important; }
 }

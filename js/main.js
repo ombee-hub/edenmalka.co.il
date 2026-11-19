@@ -155,7 +155,7 @@
     // Autoplay: advances every few seconds, loops back to the start; pauses on hover, focus and touch,
     // and stays off when the visitor prefers reduced motion (system setting or the accessibility menu)
     function motionOff() {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('a11y-pause');
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('a11y-stopAnim');
     }
     function tick() {
       if (paused || motionOff() || document.hidden) return;

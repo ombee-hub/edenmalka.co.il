@@ -607,3 +607,23 @@ html.a11y-contrast .cookie-banner { background: #000; border-top-color: #ffeb3b;
   body.has-cookie-banner .wa-float { bottom: calc(var(--cookie-h, 0px) + 16px) !important; }
   body.has-cookie-banner .ombee-a11y-btn { bottom: calc(var(--cookie-h, 0px) + 16px) !important; }
 }
+
+/* ---------- services menu: horizontal mega menu across the header (desktop) ---------- */
+@media (min-width: 901px) {
+  .header-inner { position: relative; }
+  .has-sub { position: static; }
+  .site-nav .sub { left: 0; right: 0; width: auto; top: 100%; padding: 22px; border-radius: 0 0 22px 22px; border-top: 0; }
+  .site-nav .sub::before { inset: -24px 0 auto 0; height: 24px; } /* hover bridge from the link down to the panel */
+  .has-sub:hover > .sub, .has-sub.open > .sub { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .site-nav .sub li > a { flex-direction: column; align-items: center; justify-content: flex-start; gap: 12px; padding: 20px 12px 18px; text-align: center; border: 1px solid transparent; border-radius: 16px; }
+  .site-nav .sub li > a:hover { background: var(--bg); border-color: var(--line); }
+  .site-nav .sub .sub-icon { width: 54px; height: 54px; margin: 0; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
+  .site-nav .sub li > a:hover .sub-icon { background: #fff; border-color: var(--accent-soft); }
+  .site-nav .sub .sub-icon svg { width: 28px; height: 28px; }
+  .sub-text { align-items: center; gap: 4px; }
+  .site-nav .sub .sub-title { font-size: 1.1rem; }
+  .sub-desc { font-size: .92rem; line-height: 1.5; white-space: normal; }
+  .site-nav .sub .sub-all { margin-top: 4px; padding-top: 18px; }
+  .site-nav .sub .sub-all a { flex-direction: row; border: 0; padding: 14px 34px; }
+  .site-nav .sub .sub-all a:hover { border: 0; }
+}
